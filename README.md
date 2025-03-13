@@ -1,37 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# URL Shortener Application
 
-## Getting Started
+A modern URL shortening application built with Next.js 15, React 19, and PostgreSQL.
 
-First, run the development server:
+## 🧰 Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Frontend**: Next.js 15, React 19, Tailwind CSS, Shadcn UI
+- **Backend**: Next.js Server Actions, Next-Auth
+- **Database**: PostgreSQL, Drizzle ORM
+- **AI Integration**: Google Gemini API
+- **Authentication**: Next-Auth with JWT strategy
+- **Deployment**: Ready for Vercel deployment
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Custom URL shortening with optional custom slugs
+- QR code generation for shortened URLs
+- User authentication and management
+- User dashboard with link analytics
+- Admin dashboard for system management
+- AI-powered insights using Google Gemini
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📋 Prerequisites
 
-## Learn More
+- Node.js 18.x or later
+- PostgreSQL 13 or later
+- Google Gemini API key
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/2tay/url-shortener.git
+   cd url-shortener
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Install dependencies:
+   ```bash
+   npm install
+   # or yarn, pnpm, bun
+   ```
 
-## Deploy on Vercel
+3. Set up environment variables:
+   Create a `.env` file in the root directory with the following variables:
+   ```
+   DATABASE_URL=postgresql://username:password@localhost:5432/your_database_name
+   NEXTAUTH_SECRET=your-nextauth-secret-key
+   NEXTAUTH_URL=http://localhost:3000
+   GEMINI_API_KEY=your-google-gemini-api-key
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Set up the database:
+   ```bash
+   npx drizzle-kit push
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# url-shortener
+5. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+6. Open [http://localhost:3000](http://localhost:3000) to view the application
+
+## 🚀 Deployment
+
+This application is ready to be deployed on Vercel:
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Configure the environment variables
+4. Deploy!
+
+## 📝 License
+
+[MIT](LICENSE)
+
+## 🔗 Acknowledgements
+
+- Powered by [Next.js](https://nextjs.org)
+- Database management with [Drizzle ORM](https://orm.drizzle.team)
+- Authentication via [NextAuth.js](https://next-auth.js.org)
+- UI components from [Shadcn UI](https://ui.shadcn.com)
+- AI capabilities from [Google Gemini](https://ai.google.dev)
