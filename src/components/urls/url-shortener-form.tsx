@@ -13,7 +13,7 @@ import { UrlFormData, urlSchema } from "@/lib/types";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { shortenUrl } from "@/server/actions/urls/shorten-url";
 import { Card, CardContent } from "../ui/card";
 import { AlertTriangle, Copy, QrCode } from "lucide-react";
@@ -35,11 +35,17 @@ export function UrlShortenerForm() {
   const [error, setError] = useState<string | null>(null);
   const [showSignupDialog, setShowSignupDialog] = useState(false);
   const [isQrCodeModalOpen, setIsQrCodeModalOpen] = useState(false);
+  const [origin, setOrigin] = useState("");
   const [flaggedInfo, setFlaggedInfo] = useState<{
     flagged: boolean;
     reason: string | null;
     message: string | undefined;
   } | null>(null);
+
+  // Set origin safely after component mounts
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
 
   const form = useForm<UrlFormData>({
     resolver: zodResolver(urlSchema),
@@ -161,9 +167,7 @@ export function UrlShortenerForm() {
                   <FormControl>
                     <div className="flex items-center">
                       <span className="text-sm text-muted-foreground mr-2">
-                        {process.env.NEXT_PUBLIC_APP_URL ||
-                          window.location.origin}
-                        /r/
+                        {process.env.NEXT_PUBLIC_APP_URL || origin}/r/
                       </span>
                       <Input
                         placeholder="Custom code (optional)"
