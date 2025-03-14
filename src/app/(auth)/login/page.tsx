@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Suspense } from "react";
 
 export default function LoginPage() {
   return (
@@ -28,7 +29,9 @@ export default function LoginPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <LoginForm />
+            <Suspense fallback={<div>Loading login form...</div>}>
+              <LoginForm />
+            </Suspense>
           </CardContent>
         </Card>
       </div>
