@@ -26,7 +26,7 @@ export default async function DashboardPage() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold mb-8 text-center">Dashboard</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center text-orange-500">Dashboard</h1>
 
       <div className="grid gap-8">
         <Card className="shadow-sm">

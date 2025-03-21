@@ -74,93 +74,120 @@ export function RegisterForm() {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="John Doe"
-                  autoComplete="name"
-                  disabled={isLoading}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="example@example.com"
-                  type="email"
-                  autoComplete="email"
-                  disabled={isLoading}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="********"
-                  type="password"
-                  autoComplete="current-password"
-                  disabled={isLoading}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="confirmPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirm Password</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="********"
-                  type="password"
-                  autoComplete="new-password"
-                  disabled={isLoading}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+    <div className="max-w-screen max-h-screen mx-auto border border-gray-200 rounded-md shadow-sm p-6 bg-white">
+      <div className="border-b border-gray-200 pb-4 mb-6">
+        <h2 className="text-lg font-medium text-orange-500">Informations générales</h2>
+      </div>
+      
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <FormLabel className="text-sm font-medium text-black">Nom complet <span className="text-orange-500">*</span></FormLabel>
+                </div>
+                <FormControl>
+                  <Input
+                    placeholder="John Doe"
+                    autoComplete="name"
+                    disabled={isLoading}
+                    className="border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 h-10"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-xs text-red-500" />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <FormLabel className="text-sm font-medium text-black">Email <span className="text-red-500">*</span></FormLabel>
+                </div>
+                <FormControl>
+                  <Input
+                    placeholder="example@example.com"
+                    type="email"
+                    autoComplete="email"
+                    disabled={isLoading}
+                    className="border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 h-10"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-xs text-red-500" />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <FormLabel className="text-sm font-medium text-black">Mot de passe <span className="text-red-500">*</span></FormLabel>
+                </div>
+                <FormControl>
+                  <Input
+                    placeholder="********"
+                    type="password"
+                    autoComplete="current-password"
+                    disabled={isLoading}
+                    className="border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 h-10"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-xs text-red-500" />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <FormLabel className="text-sm font-medium text-black">Confirmer le mot de passe <span className="text-red-500">*</span></FormLabel>
+                </div>
+                <FormControl>
+                  <Input
+                    placeholder="********"
+                    type="password"
+                    autoComplete="new-password"
+                    disabled={isLoading}
+                    className="border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 h-10"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-xs text-red-500" />
+              </FormItem>
+            )}
+          />
 
-        {error && (
-          <div className="text-sm text-destructive font-medium">{error}</div>
-        )}
+          {error && (
+            <div className="text-sm text-red-500 font-medium">{error}</div>
+          )}
 
-        <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading && <Loader2 className="mr-2 size-4 animate-spin" />}
-          Create Account
-        </Button>
-      </form>
-    </Form>
+          <div className="flex justify-end pt-4 space-x-2 border-t border-gray-200">
+            <Button 
+              type="submit" 
+              disabled={isLoading}
+              className="bg-orange-500 hover:bg-orange-600 text-white"
+            >
+              {isLoading && <Loader2 className="max-w-screen max-h-screen mx-auto border border-gray-200 rounded-md shadow-sm p-6 bg-white" />}
+              Valider
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
   );
 }

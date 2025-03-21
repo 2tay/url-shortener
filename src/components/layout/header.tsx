@@ -26,11 +26,13 @@ export function Header() {
   const isAuthenticated = status === "authenticated";
 
   return (
-    <header className="border-b">
-      <div className="container mx-auto flex items-center justify-between p-4">
-        <Link href={"/"} className="text-xl font-bold">
-          ShortLink
-        </Link>
+    <header className="border-b bg-black">
+      <div className="container mx-auto flex items-center justify-between p-2">
+          <Link href={"/"} className="text-xl font-bold ">
+      <span className="text-orange-500 ">Orange</span>
+      <span className="block text-white">Link</span>
+    </Link>
+
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-2">

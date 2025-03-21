@@ -10,7 +10,7 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
+  --background: #ffffff; /* Blanc pour fond clair */
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -51,7 +51,7 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: oklch(0.145 0 0); /* Keep dark background */
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -134,6 +134,7 @@
     @apply border-border outline-ring/50;
   }
   body {
+    background-color: var(--background); /* Utilisation de la variable définie dans :root */
     @apply bg-background text-foreground;
   }
 }

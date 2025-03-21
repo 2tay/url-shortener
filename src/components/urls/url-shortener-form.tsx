@@ -127,7 +127,7 @@ export function UrlShortenerForm() {
 
   return (
     <>
-      <div className="w-full max-w-2xl mx-auto">
+      <div className="max-w-screen max-h-screen mx-auto border border-gray-200 rounded-md shadow-sm p-6 bg-white">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-2">
@@ -140,14 +140,19 @@ export function UrlShortenerForm() {
                       <Input
                         placeholder="Paste your long URL here"
                         {...field}
-                        disabled={false}
+                        disabled={isLoading}
+                        className="border-gray-300 focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50 rounded-md px-4 py-2 bg-white"
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-sm text-red-500" />
                   </FormItem>
                 )}
               />
-              <Button type="submit" disabled={isLoading}>
+              <Button 
+                type="submit" 
+                disabled={isLoading}
+                className="bg-orange-500 hover:bg-orange-600 text-white rounded-md px-4 py-2 transition-colors duration-200"
+              >
                 {isLoading ? (
                   <>
                     <span className="mr-2 size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
@@ -166,7 +171,7 @@ export function UrlShortenerForm() {
                 <FormItem>
                   <FormControl>
                     <div className="flex items-center">
-                      <span className="text-sm text-muted-foreground mr-2">
+                      <span className="text-sm text-gray-500 bg-gray-50 px-3 py-2 border border-gray-300 rounded-l-md">
                         {process.env.NEXT_PUBLIC_APP_URL || origin}/r/
                       </span>
                       <Input
@@ -175,25 +180,25 @@ export function UrlShortenerForm() {
                         value={field.value || ""}
                         onChange={(e) => field.onChange(e.target.value || "")}
                         disabled={isLoading}
-                        className="flex-1"
+                        className="flex-1 border-gray-300 focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50 rounded-r-md px-4 py-2"
                       />
                     </div>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-sm text-red-500" />
                 </FormItem>
               )}
             />
 
             {error && (
-              <div className="p-3 bg-destructive/10 text-destructive rounded-md text-sm">
+              <div className="p-3 bg-red-50 border border-red-200 text-red-600 rounded-md text-sm">
                 {error}
               </div>
             )}
 
             {shortUrl && (
-              <Card>
+              <Card className="border border-gray-200 bg-white shadow-sm">
                 <CardContent className="p-4">
-                  <p className="text-sm font-medium text-muted-foreground mb-2">
+                  <p className="text-sm font-medium text-gray-700 mb-2">
                     Your shortened URL:
                   </p>
                   <div className="flex items-center gap-2">
@@ -201,12 +206,12 @@ export function UrlShortenerForm() {
                       type="text"
                       value={shortUrl}
                       readOnly
-                      className="font-medium"
+                      className="font-medium border-gray-300 bg-gray-50"
                     />
                     <Button
                       type="button"
                       variant={"outline"}
-                      className="flex-shrink-0"
+                      className="flex-shrink-0 border-gray-300 hover:bg-gray-50 text-gray-700"
                       onClick={copyToClipboard}
                     >
                       <Copy className="size-4 mr-1" />
@@ -215,7 +220,7 @@ export function UrlShortenerForm() {
                     <Button
                       type="button"
                       variant={"outline"}
-                      className="flex-shrink-0"
+                      className="flex-shrink-0 border-gray-300 hover:bg-gray-50 text-gray-700"
                       onClick={showQrCode}
                     >
                       <QrCode className="size-4" />
@@ -223,19 +228,19 @@ export function UrlShortenerForm() {
                   </div>
 
                   {flaggedInfo && flaggedInfo.flagged && (
-                    <div className="mt-3 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md">
+                    <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
                       <div className="flex items-start gap-2">
-                        <AlertTriangle className="size-5 text-yellow-600 dark:text-yellow-400 mt-0.5 flex-shrink-0" />
+                        <AlertTriangle className="size-5 text-yellow-600 mt-0.5 flex-shrink-0" />
                         <div>
-                          <p className="text-sm font-medium text-yellow-800 dark:text-yellow-300">
+                          <p className="text-sm font-medium text-yellow-800">
                             This URL has been flagged for review
                           </p>
-                          <p className="text-xs text-yellow-700 dark:text-yellow-400 mt-1">
+                          <p className="text-xs text-yellow-700 mt-1">
                             {flaggedInfo.message ||
                               "This URL will be reviewed by an administrator before it becomes fully active."}
                           </p>
                           {flaggedInfo.reason && (
-                            <p className="text-sm mt-2 text-yellow-600 dark:text-yellow-400">
+                            <p className="text-sm mt-2 text-yellow-600">
                               <span className="font-medium">Reason:</span>{" "}
                               {flaggedInfo.reason || "Unknown reason"}
                             </p>
