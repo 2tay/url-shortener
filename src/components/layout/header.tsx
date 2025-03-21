@@ -28,14 +28,14 @@ export function Header() {
   return (
     <header className="border-b bg-black">
       <div className="container mx-auto flex items-center justify-between p-2">
-          <Link href={"/"} className="text-xl font-bold ">
-      <span className="text-orange-500 ">Orange</span>
-      <span className="block text-white">Link</span>
-    </Link>
+      <Link href={"/"} className="text-xl font-bold pl-18 ml-18">
+        <span className="text-orange-500">Orange</span>
+        <span className="block text-white">Link</span>
+      </Link>
 
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-2">
+        <nav className="hidden md:flex items-center gap-2 ml-[-18px]">
           <ThemeToggle />
           <Button variant={"ghost"} size={"sm"} asChild>
             <Link href={"/stats"} className="flex items-center gap-1">

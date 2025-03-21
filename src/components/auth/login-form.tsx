@@ -5,6 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Eye, EyeOff } from "lucide-react";
+
 import { z } from "zod";
 import { Button } from "../ui/button";
 import {
@@ -153,6 +155,7 @@ export function LoginForm() {
                     placeholder="example@example.com"
                     type="email"
                     autoComplete="email"
+                    className="text-black placeholder-gray-500"
                     disabled={isLoading}
                     {...field}
                   />
@@ -161,31 +164,46 @@ export function LoginForm() {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="********"
-                    type="password"
-                    autoComplete="current-password"
-                    disabled={isLoading}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+         <FormField
+  control={form.control}
+  name="password"
+  render={({ field }) => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    return (
+      <FormItem>
+        <FormLabel>Password</FormLabel>
+        <FormControl>
+          <div className="relative">
+            <Input
+              placeholder="********"
+              type={showPassword ? "text" : "password"}
+              autoComplete="current-password"
+              disabled={isLoading}
+              className="text-black placeholder-gray-500 pr-10"
+              {...field}
+            />
+            <button
+              type="button"
+              className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+            </button>
+          </div>
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    );
+  }}
+/>
+
 
           {error && (
             <div className="text-sm text-destructive font-medium">{error}</div>
           )}
 
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button type="submit" className="w-full bg-orange" disabled={isLoading}>
             {isLoading && <Loader2 className="mr-2 size-4 animate-spin" />}
             Sign in
           </Button>

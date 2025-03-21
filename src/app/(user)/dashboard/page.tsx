@@ -31,7 +31,7 @@ export default async function DashboardPage() {
       <div className="grid gap-8">
         <Card className="shadow-sm">
           <CardHeader>
-            <CardTitle>Create New Short URL</CardTitle>
+            <CardTitle className="shadow-sm text-orange-500">Create New Short URL</CardTitle>
             <CardDescription>
               Enter a long URL to create a shortened link. You can also
               customize the short code.

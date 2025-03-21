@@ -131,23 +131,27 @@ export function UrlShortenerForm() {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-2">
-              <FormField
-                control={form.control}
-                name="url"
-                render={({ field }) => (
-                  <FormItem className="flex-1">
-                    <FormControl>
-                      <Input
-                        placeholder="Paste your long URL here"
-                        {...field}
-                        disabled={isLoading}
-                        className="border-gray-300 focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50 rounded-md px-4 py-2 bg-white"
-                      />
-                    </FormControl>
-                    <FormMessage className="text-sm text-red-500" />
-                  </FormItem>
-                )}
-              />
+            <FormField
+  control={form.control}
+  name="url"
+  render={({ field }) => (
+    <FormItem className="flex-1">
+      <FormControl>
+        <Input
+          type="url"
+          placeholder="Paste your long URL here"
+          {...field} // Utilisation correcte des props de RHF
+          value={field.value || ""} // Empêche les erreurs si la valeur est undefined
+          onChange={(e) => field.onChange(e.target.value)} // Met à jour la valeur
+          disabled={isLoading}
+          className="text-black border-gray-300 focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50 rounded-md px-4 py-2 bg-white"
+        />
+      </FormControl>
+      <FormMessage className="text-sm text-red-500" />
+    </FormItem>
+  )}
+/>
+
               <Button 
                 type="submit" 
                 disabled={isLoading}
@@ -202,16 +206,17 @@ export function UrlShortenerForm() {
                     Your shortened URL:
                   </p>
                   <div className="flex items-center gap-2">
-                    <Input
-                      type="text"
-                      value={shortUrl}
-                      readOnly
-                      className="font-medium border-gray-300 bg-gray-50"
+                  <Input
+                    type="text"
+                    value={shortUrl}
+                    readOnly
+                    className="text-black border-gray-300 focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50 rounded-md px-4 py-2 bg-white"
                     />
+
                     <Button
                       type="button"
                       variant={"outline"}
-                      className="flex-shrink-0 border-gray-300 hover:bg-gray-50 text-gray-700"
+                      className="flex-shrink-0 border-gray-300 hover:bg-gray-50 text-orange-500"
                       onClick={copyToClipboard}
                     >
                       <Copy className="size-4 mr-1" />
@@ -220,7 +225,7 @@ export function UrlShortenerForm() {
                     <Button
                       type="button"
                       variant={"outline"}
-                      className="flex-shrink-0 border-gray-300 hover:bg-gray-50 text-gray-700"
+                      className="flex-shrink-0 border-gray-300 hover:bg-gray-50 text-orange-500"
                       onClick={showQrCode}
                     >
                       <QrCode className="size-4" />
