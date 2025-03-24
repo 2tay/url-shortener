@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { registerUser } from "@/server/actions/auth/register";
 
 const registerSchema = z
@@ -36,6 +36,7 @@ export function RegisterForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -81,20 +82,21 @@ export function RegisterForm() {
       
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          {/* Champ Nom */}
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <FormLabel className="text-sm font-medium text-black">Nom complet <span className="text-orange-500">*</span></FormLabel>
-                </div>
+                <FormLabel className="text-sm font-medium text-black">
+                  Nom complet <span className="text-orange-500">*</span>
+                </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="John Doe"
                     autoComplete="name"
                     disabled={isLoading}
-                    className="border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 h-10"
+                    className="text-black border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 h-10"
                     {...field}
                   />
                 </FormControl>
@@ -102,22 +104,23 @@ export function RegisterForm() {
               </FormItem>
             )}
           />
-          
+
+          {/* Champ Email */}
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <FormLabel className="text-sm font-medium text-black">Email <span className="text-red-500">*</span></FormLabel>
-                </div>
+                <FormLabel className="text-sm font-medium text-black">
+                  Email <span className="text-red-500">*</span>
+                </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="example@example.com"
                     type="email"
                     autoComplete="email"
                     disabled={isLoading}
-                    className="border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 h-10"
+                    className="text-black border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 h-10"
                     {...field}
                   />
                 </FormControl>
@@ -125,64 +128,78 @@ export function RegisterForm() {
               </FormItem>
             )}
           />
-          
+
+          {/* Champ Mot de passe */}
           <FormField
             control={form.control}
             name="password"
             render={({ field }) => (
               <FormItem className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <FormLabel className="text-sm font-medium text-black">Mot de passe <span className="text-red-500">*</span></FormLabel>
-                </div>
+                <FormLabel className="text-sm font-medium text-black">
+                  Mot de passe <span className="text-red-500">*</span>
+                </FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="********"
-                    type="password"
-                    autoComplete="current-password"
-                    disabled={isLoading}
-                    className="border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 h-10"
-                    {...field}
-                  />
+                  <div className="relative">
+                    <Input
+                      placeholder="********"
+                      type={showPassword ? "text" : "password"}
+                      autoComplete="current-password"
+                      disabled={isLoading}
+                      className="text-black border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 h-10 pr-10"
+                      {...field}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-3 flex items-center text-gray-600"
+                    >
+                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
                 </FormControl>
                 <FormMessage className="text-xs text-red-500" />
               </FormItem>
             )}
           />
-          
+
+          {/* Champ Confirmer le mot de passe */}
           <FormField
             control={form.control}
             name="confirmPassword"
             render={({ field }) => (
               <FormItem className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <FormLabel className="text-sm font-medium text-black">Confirmer le mot de passe <span className="text-red-500">*</span></FormLabel>
-                </div>
+                <FormLabel className="text-sm font-medium text-black">
+                  Confirmer le mot de passe <span className="text-red-500">*</span>
+                </FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="********"
-                    type="password"
-                    autoComplete="new-password"
-                    disabled={isLoading}
-                    className="border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 h-10"
-                    {...field}
-                  />
+                  <div className="relative">
+                    <Input
+                      placeholder="********"
+                      type={showPassword ? "text" : "password"}
+                      autoComplete="new-password"
+                      disabled={isLoading}
+                      className="text-black border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 h-10 pr-10"
+                      {...field}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-3 flex items-center text-gray-600"
+                    >
+                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
                 </FormControl>
                 <FormMessage className="text-xs text-red-500" />
               </FormItem>
             )}
           />
 
-          {error && (
-            <div className="text-sm text-red-500 font-medium">{error}</div>
-          )}
+          {error && <div className="text-sm text-red-500 font-medium">{error}</div>}
 
           <div className="flex justify-end pt-4 space-x-2 border-t border-gray-200">
-            <Button 
-              type="submit" 
-              disabled={isLoading}
-              className="bg-orange-500 hover:bg-orange-600 text-white"
-            >
-              {isLoading && <Loader2 className="max-w-screen max-h-screen mx-auto border border-gray-200 rounded-md shadow-sm p-6 bg-white" />}
+            <Button type="submit" disabled={isLoading} className="bg-orange-500 hover:bg-orange-600 text-white">
+              {isLoading && <Loader2 className="animate-spin w-4 h-4 mr-2" />}
               Valider
             </Button>
           </div>
